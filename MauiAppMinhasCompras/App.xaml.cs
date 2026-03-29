@@ -8,23 +8,49 @@ namespace MauiAppMinhasCompras
 
         public static SQLiteDatabaseHelper Db
         {
-            get 
+            get
             {
                 if (_db == null)
                 {
-                    string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "banco_sqlite_compras.db3");
-                    _db = new SQLiteDatabaseHelper(path);
+                    try
+                    {
+                        string path = Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                            "banco_sqlite_compras.db3"
+                        );
+
+                        _db = new SQLiteDatabaseHelper(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Erro ao criar banco: " + ex.Message);
+                    }
                 }
 
                 return _db;
             }
         }
+
         public App()
         {
             InitializeComponent();
 
-            //MainPage = new AppShell();
-            MainPage = new NavigationPage(new Views.ListaProduto());
+            try
+            {
+                MainPage = new NavigationPage(new Views.ListaProduto());
+            }
+            catch (Exception ex)
+            {
+                MainPage = new ContentPage
+                {
+                    Content = new Label
+                    {
+                        Text = ex.ToString(),
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    }
+                };
+            }
         }
     }
 }

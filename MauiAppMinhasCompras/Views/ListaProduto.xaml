@@ -6,11 +6,11 @@
              BackgroundColor="#121212">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="sum.png.png"
+        <ToolbarItem IconImageSource="sum.png"
              Clicked="ToolbarItem_Clicked_1"
              Order="Primary"/>
 
-        <ToolbarItem IconImageSource="add.png.png"
+        <ToolbarItem IconImageSource="add.png"
              Clicked="ToolbarItem_Clicked"
              Order="Primary"/>
     </ContentPage.ToolbarItems>
